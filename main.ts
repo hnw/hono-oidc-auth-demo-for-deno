@@ -1,9 +1,8 @@
-import { Hono } from 'https://deno.land/x/hono@v4.0.4/mod.ts'
+import { Hono } from 'npm:hono'
+import { serveStatic } from 'npm:hono/deno'
 
 const app = new Hono()
 
-app.get('/', (c) => {
-  return c.text('Hello Hono!')
-})
+app.use('/*', serveStatic({ root: 'public/' }))
 
 Deno.serve(app.fetch)
